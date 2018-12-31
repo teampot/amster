@@ -7,7 +7,7 @@ An application that allows:
   - Have experience of working together;
   - Love and want to work together in the future independantly of their current positions;
   
-Why anyone needs an app like this?
+Why would anyone need an app like this?
 - It's hard to create/find/hire highly skilled, cross-functional and motivated teams that can execute project in the most efficient and effective ways from day zero.
 
 As a "People:)": 
