@@ -16,5 +16,5 @@ As a "People:)":
 As an Organization:
  - I want to hire teams of people who love working together and know how to do it in a proper way;
 
- moqups:
+ Moqups:
  https://app.moqups.com/alexander.yefimochkin@gmail.com/tM0JcSE4xn/view/page/a52dce48b
