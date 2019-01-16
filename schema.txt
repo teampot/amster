@@ -8,8 +8,12 @@ Teams - represents a team
 -> CanStartAtMin - minimum notice period of the team member
 -> CanStartAtMax - minimum notice period of the team member
 -> [TagIds]
+-> CreationDate
+-> CreationUser
+-> EditDate
+-> EditUser
 
--Accounts - represents a teampot account
+-User - represents a teampot user - team member, recruiter, 
 -> Id
 -> [TeamIds]
 -> First Name
@@ -19,9 +23,17 @@ Teams - represents a team
 -> Description
 -> [{SocialAccounts}] - social media account (LinkedIn, githib, ...)
 -> [TagIds]
+-> CreationDate
+-> CreationUser
+-> EditDate
+-> EditUser
 
 Tag
 -> Id
 -> Name - Software Engineering, Construction, Catering, FinTech, Real Estate, Asia, Europe, Hong Kong, South America, London, English, Russian, German...
 -> Type - ProfessionalDomain, BussinessDomain, GeoLocations, Languages
 -> Source - LinkedIn, github, teampot
+-> CreationDate
+-> CreationUser
+-> EditDate
+-> EditUser
