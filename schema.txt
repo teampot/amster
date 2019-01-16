@@ -1,6 +1,7 @@
 Teams - represents a team
 -> Id
 -> [UserIds]
+-> [TeamIds]
 -> Name
 -> Header
 -> Description
