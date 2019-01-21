@@ -75,6 +75,7 @@ function Index() {
         if (loading) return <div>Loading.</div>
         return (
           <section>
+            <h1>Below books are rendered from apollo graphql:</h1>
             <ul>
               {books.map((book: any) => (
                 <li>{book.title}</li>
