@@ -1,6 +1,16 @@
 # amster - Teampot App
 
-An application that allows:
+Installation: clone the repo, install node, install mongo db
+
+To run the apollo server goto amster\backend  and:
+- npm install
+- node index.js
+
+To run the client goto amster\frontend and:
+- npm install
+- npm run dev
+
+Teampot App: an application that allows:
 - People (that worked together or not) to self-organize themselves into highly performant and motivated teams that can execute the most diverse and complex projects in an extremely efficient way;
 - Organizations/Individuals to easily find these teams that:
   - Can execute complex projects in an extremely efficient way;

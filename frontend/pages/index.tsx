@@ -76,6 +76,7 @@ function Index() {
         return (
           <section>
             <h1>Below books are rendered from apollo graphql:</h1>
+            
             <ul>
               {books.map((book: any) => (
                 <li>{book.title}</li>
