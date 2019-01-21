@@ -10,6 +10,19 @@ import DialogActions from '@material-ui/core/DialogActions';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/styles';
 import Link from 'next/link';
+import { Query } from 'react-apollo'
+import gql from 'graphql-tag'
+
+
+export const query = gql`
+{
+   books {
+    title
+    author
+  }
+}
+`
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -56,6 +69,21 @@ function Index() {
       <Button variant="contained" color="secondary" onClick={handleClick}>
         Super Secret Password
       </Button>
+      <Query query={query}>
+      {({ loading, error, data: { books } }) => {
+        if (error) return <span>Error.</span>
+        if (loading) return <div>Loading.</div>
+        return (
+          <section>
+            <ul>
+              {books.map((book: any) => (
+                <li>{book.title}</li>
+              ))}
+            </ul>
+          </section>
+        )
+      }}
+    </Query>     
     </div>
   );
 }
