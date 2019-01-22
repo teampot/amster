@@ -1,17 +1,18 @@
-const mongoose = require('mongoose');
+import { Promise, connect, Schema, model } from 'mongoose';
 
-mongoose.Promise = global.Promise;
+Promise = global.Promise;
 
 const mongodb_cs = process.env.MONGODB
 
-const mongo = mongoose.connect(mongodb_cs, {
+const mongo = connect(mongodb_cs, {
   useNewUrlParser: true
 });
 
-const kittySchema = new mongoose.Schema({
+const kittySchema = new Schema({
     name: String
 });
 
-const Kitten = mongoose.model('Kitten', kittySchema);
+const Kitten = model('Kitten', kittySchema);
 
-exports.Kitten = Kitten;
+const _Kitten = Kitten;
+export { _Kitten as Kitten };

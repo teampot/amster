@@ -1,22 +1,14 @@
-const express = require("express");
-const { ApolloServer, gql } = require("apollo-server-express");
+import express from "express";
+import { ApolloServer, gql } from "apollo-server-express";
 
-const { Kitten } = require("./connectors");
-
-const typeDefs = gql`
-  type Query {    
-    allKittens: [Kitten]
-  }
-  type Kitten {
-    name: String
-  }
-`;
+import Kitten from "./connectors";
+import typeDefs from "../schema";
 
 const resolvers = {
     Query: {
-        allKittens() {
-        return Kitten.find();
-        }
+      allUsers() {
+        return [{Id: 1, FirstName: "asdasd", LastName: "asidoasdas" }];
+      }
     }
 };
 
