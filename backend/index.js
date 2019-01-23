@@ -1,16 +1,8 @@
 import express from "express";
-import { ApolloServer, gql } from "apollo-server-express";
+import { ApolloServer } from "apollo-server-express";
 
-import Kitten from "./connectors";
-import typeDefs from "../schema";
-
-const resolvers = {
-    Query: {
-      allUsers() {
-        return [{Id: 1, FirstName: "asdasd", LastName: "asidoasdas" }];
-      }
-    }
-};
+import typeDefs from "./schema";
+import resolvers from "./resolvers";
 
 const server = new ApolloServer({ typeDefs, resolvers, introspection: true, playground: true });
 

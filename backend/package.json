@@ -1,4 +1,7 @@
 {
+  "name": "teampot-backend",
+  "version": "1.0.0",
+  "private": true,
   "dependencies": {
     "apollo-server-express": "^2.2.2",
     "express": "^4.16.4",
