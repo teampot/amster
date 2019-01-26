@@ -1,76 +1,76 @@
-import { gql } from 'apollo-server-express';
+const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
   scalar Date
 
   enum RoleType {
-    Admin,
+    Admin
     Member
   }
 
   enum SocialAccountType {
-    LinkedIn,
+    LinkedIn
     GitHub
   }
 
   type Team {    
-    Id: ID!,
-    Name: String!,    
-    Header: String,
-    Description: String,
-    CreatedAt: Date!,
-    CreatedByUserId: ID!,
-    UpdatedAt: Date,
-    UpdatedByUserId: ID,
-    Members: [Member],
-    JobsAppliedTo: [Job],
+    Id: ID!
+    Name: String!    
+    Header: String
+    Description: String
+    CreatedAt: Date!
+    CreatedByUserId: ID!
+    UpdatedAt: Date
+    UpdatedByUserId: ID
+    Members: [Member]
+    JobsAppliedTo: [Job]
     Tags: [ScoredTag]
   }
 
   type Member {
     User: User!
     Role: RoleType!
-    NoticePeriod: Int,
+    NoticePeriod: Int
     AvailableAt: Date
   }
 
   type User {
-    Id: ID!,
+    Id: ID!
     Available: Boolean!
-    FirstName: String!, 
-    LastName: String!, 
-    Description: String!, 
-    SocialAccounts: [SocialAccount],
-    CreatedAt: Date!,
-    CreatedByUserId: ID!,
-    UpdatedAt: Date,
-    UpdatedByUserId: ID,
-    TeamMemberOf: [Team],
-    JobsCreated: [Job],
+    FirstName: String! 
+    LastName: String! 
+    Description: String! 
+    SocialAccounts: [SocialAccount]
+    CreatedAt: Date!
+    CreatedByUserId: ID!
+    UpdatedAt: Date
+    UpdatedByUserId: ID
+    TeamMemberOf: [Team]
+    JobsCreated: [Job]
     Tags: [ScoredTag]
   }
 
   type Job {
-    Id: ID!,
-    Name: String!,
-    Header: String,
-    Description: String,
-    Applications: [Team],
-    CreatedAt: Date!,
-    CreatedByUserId: ID!,
-    UpdatedAt: Date,
-    UpdatedByUserId: ID,
+    Id: ID!
+    Name: String!
+    Header: String
+    Description: String
+    Applications: [Team]
+    CreatedAt: Date!
+    CreatedByUserId: ID!
+    UpdatedAt: Date
+    UpdatedByUserId: ID
     Tags: [Tag]
   }
 
   type SocialAccount {
-    ExternalId: String!,
+    ExternalId: String!
     Type: SocialAccountType!
   }
  
   type ScoredTag {
-    Name: String!,
-    Score: Integer
+    Name: String!
+    Score: Int
   }
 
   type Tag {
@@ -82,4 +82,4 @@ const typeDefs = gql`
   }
 `;
 
-export default typeDefs;
+module.exports.typeDefs = typeDefs;
