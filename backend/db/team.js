@@ -6,4 +6,4 @@ const TeamSchema = new Schema({
 
 const Team = model('Team', TeamSchema);
 
-export default User
+export default Team
