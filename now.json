@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "backend/index.js", "use": "@now/node-server" }
+  ],
+  "routes": [
+    { "src": "/.*", "dest": "backend/index.js" }
+  ],
+  "env": {
+    "MONGODB": "@mongodb-connection-string",
+    "ENGINE_API_KEY": "@apollo-engine-key"
+  }
+}

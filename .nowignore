@@ -1,0 +1,9 @@
+node_modules
+README.md
+schema.txt
+src
+pages
+.babelrc
+global.d.ts
+next.config.js
+tsconfig.json

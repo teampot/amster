@@ -9,7 +9,7 @@
     "jss": "latest",
     "next": "latest",
     "react": "next",
-    "react-dom": "next"
+    "react-dom": "next"    
   },
   "scripts": {
     "dev": "next",

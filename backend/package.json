@@ -1,0 +1,12 @@
+{
+  "name": "teampot-backend",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "apollo-server-express": "^2.2.2",
+    "express": "^4.16.4",
+    "graphql": "^14.0.2",
+    "graphql-tools": "^4.0.3",
+    "mongoose": "^5.4.5"
+  }
+}
