@@ -10,6 +10,16 @@ import DialogActions from '@material-ui/core/DialogActions';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/styles';
 import Link from 'next/link';
+import { Query } from 'react-apollo'
+import gql from 'graphql-tag'
+
+
+export const query = gql`
+{
+  allUsers{Id,FirstName,LastName}
+}
+`
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -56,6 +66,24 @@ function Index() {
       <Button variant="contained" color="secondary" onClick={handleClick}>
         Super Secret Password
       </Button>
+      <Query query={query}>
+      {({ loading, error, data: { allUsers } }) => {
+        debugger;
+        if (error) return <span>Error.</span>
+        if (loading) return <div>Loading.</div>
+        return (
+          <section>
+            <h1>Below users are rendered from apollo graphql:</h1>
+            
+            <ul>
+              {allUsers.map((user: any) => (
+                <li>{user.FirstName + ' ' + user.FirstName}</li>
+              ))}
+            </ul>
+          </section>
+        )
+      }}
+    </Query>     
     </div>
   );
 }

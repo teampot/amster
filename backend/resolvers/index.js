@@ -1,9 +1,8 @@
 const resolvers = {
   Query: {
     allUsers() {
-      return [{Id: 1, FirstName: "asdasd", LastName: "asidoasdas" }];
+      return [{Id: 1, FirstName: "John", LastName: "Dude" }];
     }
   }
 };
-
-export default resolvers;
+module.exports.resolvers = resolvers;

@@ -1,73 +1,80 @@
-import { gql } from 'apollo-server-express';
+const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
   scalar Date
 
-  enum Role {
+  enum RoleType {
+    Admin
     Member
-    Leader    
   }
 
   enum SocialAccountType {
     LinkedIn
-  }
-
-  enum TagType {
-    ProfessionalDomain
-    BussinessDomain
-    GeoLocations
-    Languages
+    GitHub
   }
 
   type Team {    
-    Id: ID!,
-    Name: String!,    
-    Header: String,
-    Description: String,
-    ProjectEndDate: Date,
-    CanStartAtMin: Int,
-    CanStartAtMax: Int,
-    CreationDate: Date!,
-    CreationUser: User!,
-    EditDate: Date,
-    EditUser: User,
-    Users: [User],
-    Teams: [Team],
-    Tags: [Tag]
+    Id: ID!
+    Name: String!    
+    Header: String
+    Description: String
+    CreatedAt: Date!
+    CreatedByUserId: ID!
+    UpdatedAt: Date
+    UpdatedByUserId: ID
+    Members: [Member]
+    JobsAppliedTo: [Job]
+    Tags: [ScoredTag]
+  }
+
+  type Member {
+    User: User!
+    Role: RoleType!
+    NoticePeriod: Int
+    AvailableAt: Date
   }
 
   type User {
-    Id: ID!,
-    FirstName: String!, 
-    LastName: String!, 
-    Role: Role,
-    NoticePeriod: Int,
-    Description: String!, 
-    SocialAccounts: [SocialAccount],
-    CreationDate: Date!,
-    CreationUser: User!,
-    EditDate: Date,
-    EditUser: User,
-    Teams: [Team],
+    Id: ID!
+    Available: Boolean!
+    FirstName: String! 
+    LastName: String! 
+    Description: String! 
+    SocialAccounts: [SocialAccount]
+    CreatedAt: Date!
+    CreatedByUserId: ID!
+    UpdatedAt: Date
+    UpdatedByUserId: ID
+    TeamMemberOf: [Team]
+    JobsCreated: [Job]
+    Tags: [ScoredTag]
+  }
+
+  type Job {
+    Id: ID!
+    Name: String!
+    Header: String
+    Description: String
+    Applications: [Team]
+    CreatedAt: Date!
+    CreatedByUserId: ID!
+    UpdatedAt: Date
+    UpdatedByUserId: ID
     Tags: [Tag]
   }
 
   type SocialAccount {
-    Id: ID!,
-    ExternalId: String!,
-    User: User!
+    ExternalId: String!
     Type: SocialAccountType!
   }
-  
-  type Tag {
-    Id: ID!,
+ 
+  type ScoredTag {
     Name: String!
-    Type: TagType!,
-    Source: SocialAccountType!,
-    CreationDate: Date!,
-    CreationUser: User!,
-    EditDate: Date,
-    EditUser: User,
+    Score: Int
+  }
+
+  type Tag {
+    Name: String!
   }
 
   type Query {
@@ -75,4 +82,4 @@ const typeDefs = gql`
   }
 `;
 
-export default typeDefs;
+module.exports.typeDefs = typeDefs;
