@@ -1,18 +1,11 @@
-import { MuiThemeProviderProps } from '@material-ui/core/styles/MuiThemeProvider';
-import Document, { AnyPageProps, Head, Main, NextScript, PageProps } from 'next/document';
-import React, { ComponentType } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import Document, { Head, Main, NextScript } from 'next/document';
 import flush from 'styled-jsx/server';
-import { PageContext } from '../src/getPageContext';
 
-class MyDocument extends Document<{
-  pageContext: MuiThemeProviderProps;
-}> {
+class MyDocument extends Document {
   render() {
     const { pageContext } = this.props;
-
-    const theme =
-      typeof pageContext.theme === 'function' ? pageContext.theme(null) : pageContext.theme;
-    const themeColor = theme.palette.primary.main;
 
     return (
       <html lang="en" dir="ltr">
@@ -24,7 +17,10 @@ class MyDocument extends Document<{
             content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
           />
           {/* PWA primary color */}
-          <meta name="theme-color" content={themeColor} />
+          <meta
+            name="theme-color"
+            content={pageContext ? pageContext.theme.palette.primary.main : null}
+          />
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
@@ -37,10 +33,6 @@ class MyDocument extends Document<{
       </html>
     );
   }
-}
-
-interface PagePropsWithPageContext extends AnyPageProps {
-  pageContext: PageContext;
 }
 
 MyDocument.getInitialProps = ctx => {
@@ -67,11 +59,15 @@ MyDocument.getInitialProps = ctx => {
   // 4. page.render
 
   // Render app and page and get the context of the page with collected side effects.
-  let pageContext: PageContext | undefined;
-  const page = ctx.renderPage((Component: ComponentType<PagePropsWithPageContext>) => {
-    const WrappedComponent: ComponentType<{ pageContext: PageContext } & PageProps> = props => {
+  let pageContext;
+  const page = ctx.renderPage(Component => {
+    const WrappedComponent = props => {
       pageContext = props.pageContext;
       return <Component {...props} />;
+    };
+
+    WrappedComponent.propTypes = {
+      pageContext: PropTypes.object.isRequired,
     };
 
     return WrappedComponent;
@@ -80,7 +76,7 @@ MyDocument.getInitialProps = ctx => {
   let css;
   // It might be undefined, e.g. after an error.
   if (pageContext) {
-    css = (pageContext as PageContext).sheetsRegistry.toString();
+    css = pageContext.sheetsRegistry.toString();
   }
 
   return {
@@ -92,7 +88,7 @@ MyDocument.getInitialProps = ctx => {
         <style
           id="jss-server-side"
           // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: css as string }}
+          dangerouslySetInnerHTML={{ __html: css }}
         />
         {flush() || null}
       </React.Fragment>

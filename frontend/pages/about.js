@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import '../src/bootstrap';
 // --- Post bootstrap -----
 import React from 'react';
@@ -14,7 +15,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function About() {
-  const classes = useStyles({});
+  const classes = useStyles();
 
   return (
     <div className={classes.root}>
