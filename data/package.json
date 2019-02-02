@@ -1,0 +1,8 @@
+{
+  "name": "teampot-data",
+  "version": "1.0.0",
+  "dependencies": {
+    "apollo-server-express": "^2.3.3",
+    "graphql": "^14.1.1"
+  }
+}

@@ -5,31 +5,19 @@
   "dependencies": {
     "@material-ui/core": "latest",
     "@material-ui/styles": "latest",
-    "@zeit/next-typescript": "^1.1.1",
+    "apollo-boost": "^0.1.27",
+    "graphql": "^14.1.1",
+    "isomorphic-unfetch": "^3.0.0",
     "jss": "latest",
     "next": "latest",
+    "prop-types": "latest",
     "react": "next",
-    "react-apollo": "^2.4.0",
+    "react-apollo": "^2.4.1",
     "react-dom": "next"
   },
   "scripts": {
     "dev": "next",
     "build": "next build",
     "start": "next start"
-  },
-  "devDependencies": {
-    "@types/next": "^7.0.5",
-    "@types/react": "^16.7.17",
-    "@types/react-dom": "^16.0.11",
-    "@types/styled-jsx": "^2.2.7",
-    "apollo-boost": "^0.1.27",
-    "graphql": "^14.0.2",
-    "isomorphic-unfetch": "^3.0.0",
-    "next": "^7.0.2",
-    "prop-types": "^15.6.2",
-    "react": "^16.7.17",
-    "react-apollo": "^2.1.11",
-    "react-dom": "^16.0.11",
-    "typescript": "^3.2.2"
   }
 }

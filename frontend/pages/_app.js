@@ -1,19 +1,16 @@
 import '../src/bootstrap';
 // --- Post bootstrap -----
-import React, { ReactNode } from 'react';
-import App, { Container, AppProps } from 'next/app';
+import React from 'react';
+import App, { Container } from 'next/app';
 import Head from 'next/head';
 import { StylesProvider, ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import getPageContext, { PageContext } from '../src/getPageContext';
+import getPageContext from '../src/getPageContext';
 import { ApolloProvider } from 'react-apollo'
 import withApolloClient from '../src/with-apollo-client'
 
-
-
 class MyApp extends App {
   constructor() {
-    // @ts-ignore
     super();
     this.pageContext = getPageContext();
   }
@@ -27,7 +24,7 @@ class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps, apolloClient } = this.props as Readonly<{ children?: ReactNode }> & Readonly<AppProps<Record<string, string | string[] | undefined>>> & any
+    const { Component, pageProps, apolloClient } = this.props;
     return (
       <Container>
         <ApolloProvider client={apolloClient}>
@@ -46,7 +43,7 @@ class MyApp extends App {
               {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
               <CssBaseline />
               {/* Pass pageContext to the _document though the renderPage enhancer
-                to render collected styles on server side. */}
+                to render collected styles on server-side. */}
               <Component pageContext={this.pageContext} {...pageProps} />
             </ThemeProvider>
           </StylesProvider>
@@ -54,8 +51,6 @@ class MyApp extends App {
       </Container>
     );
   }
-
-  private pageContext: PageContext;
 }
 
 export default withApolloClient(MyApp)
