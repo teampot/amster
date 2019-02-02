@@ -17,7 +17,7 @@ import gql from 'graphql-tag';
 
 export const query = gql`
 {
-  allUsers{Id,FirstName,LastName}
+	me{id}
 }
 `;
 

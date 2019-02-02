@@ -1,4 +1,5 @@
-const typeDefs = `
+const { gql } = require('apollo-server-express');
+const typeDefs = gql`
 #TYPES#####################################
   scalar Date
   
@@ -146,7 +147,7 @@ const typeDefs = `
   type RootMutation {
     upsertUser(user: UserInput): User
     upsertTeam(team: TeamInput): Team
-    #upsertJob(job: JobInput): Job
+    upsertJob(job: JobInput): Job
   }
   
   schema {

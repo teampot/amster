@@ -26,9 +26,9 @@ const resolvers = {
     upsertTeam(team) {
 
     },
-    // upsertJob(job) {
+    upsertJob(job) {
 
-    // },
+    },
   }
 }
 
