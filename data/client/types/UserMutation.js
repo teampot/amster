@@ -5,33 +5,16 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: RootQuery
+// GraphQL mutation operation: UserMutation
 // ====================================================
 
-export type RootQuery_me = {
+export type UserMutation_upsertUser = {
+  __typename: "User",
   id: string,
-  firstName: string,
 };
 
-export type RootQuery = {
-  me: ?RootQuery_me
-};
-
-
-/* @flow */
-/* eslint-disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL mutation operation: RootMutation
-// ====================================================
-
-export type RootMutation_upsertUser = {
-  id: string
-};
-
-export type RootMutation = {
-  upsertUser: ?RootMutation_upsertUser
+export type UserMutation = {
+  upsertUser: ?UserMutation_upsertUser
 };
 
 /* @flow */

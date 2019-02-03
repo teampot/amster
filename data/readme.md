@@ -1,13 +1,11 @@
 
-#Generate Client side data contracts
-#Run the apollo server from /backend
--> node index.js
-#In another terminal
--> apollo service:download --endpoint=http://localhost:4000/graphql
+# In '\data' folder
+#Run apollo sverver to be able to get the latest schema if you edited it in gql
+-> npm run server
 
-#Temp usage of apollo-codegen generate in /data folder https://www.apollographql.com/docs/react/features/developer-tooling.html
+#Download the schema from the server in another terminal
+-> npm run download
 
--> apollo-codegen generate .\client-query.js  --schema server-schema.json --target flow --output client-types.js
-
-#To do: try to fix failing ->apollo client:codegen src/types --target=flow
+#generate clint side contracts based on queries/mutations and server introspection schema (local, can be the running server version if url is used in apollo.config.js)
+-> npm run types
 
