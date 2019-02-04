@@ -1,7 +1,27 @@
-import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost'
-import fetch from 'isomorphic-unfetch'
+
+import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost';
+import { makeExecutableSchema } from 'graphql-tools';
+import { SchemaLink } from 'apollo-link-schema';
+import fetch from 'isomorphic-unfetch';
+import process from 'process';
+
+const { resolvers } = require('./mocks/resolvers.js');
+const { gql } = require('apollo-server-express');
+const { typeDefs } = require('./mocks/schema.js');
+
 
 let apolloClient = null
+
+function getLink () {
+  let executableSchema = makeExecutableSchema({
+    typeDefs,
+    resolvers,
+  });
+  return new SchemaLink({ schema: executableSchema });
+  // return new HttpLink({
+  //   uri: 'http://localhost:4000/graphql' // Server URL (must be absolute)
+  // });
+}
 
 // Polyfill fetch() on the server (used by apollo-client)
 if (!process.browser) {
@@ -13,9 +33,7 @@ function create (initialState) {
   return new ApolloClient({
     connectToDevTools: process.browser,
     ssrMode: !process.browser, // Disables forceFetch on the server (so queries are only run once)
-    link: new HttpLink({
-      uri: 'http://localhost:4000/graphql' // Server URL (must be absolute)
-    }),
+    link: getLink(),
     cache: new InMemoryCache().restore(initialState || {})
   })
 }

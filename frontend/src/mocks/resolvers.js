@@ -1,7 +1,7 @@
 const resolvers = {
   RootQuery: {
     me(){
-      return {id:10};
+      return {firstName:'Dude', id:15, lastName: 'John'};
     },
     team(id) {
 
