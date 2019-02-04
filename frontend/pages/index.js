@@ -66,7 +66,7 @@ function Index() {
       <Button variant="contained" color="secondary" onClick={handleClick}>
         Super Secret Password
       </Button>
-      <Query query={query}>
+      {/* <Query query={query}>
       {({ loading, error, data: { allUsers } }) => {
         debugger;
         if (error) return <span>Error.</span>
@@ -83,7 +83,7 @@ function Index() {
           </section>
         )
       }}
-    </Query>     
+    </Query>      */}
     </div>
   );
 }
