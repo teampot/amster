@@ -1,0 +1,78 @@
+enum RoleType {
+  ADMIN
+  MEMBER
+}
+
+enum SocialAccountType {
+  LINKEDIN
+  GITHUB
+}
+
+type Team {    
+  id: ID! @id
+  enabled: Boolean! @default(value: false)
+  name: String!    
+  header: String
+  description: String
+  createdAt: DateTime! @createdAt
+  createdByUserId: ID! @id
+  updatedAt: DateTime @updatedAt
+  updatedByUserId: ID! @id
+  members: [Member!]!
+  jobsAppliedTo: [Job] @relation(link: INLINE)
+  tags: [ScoredTag]
+}
+
+type User {
+  id: ID! @id
+  email: String @unique
+  available: Boolean!
+  firstName: String! 
+  lastName: String! 
+  description: String! 
+  socialAccounts: [SocialAccount!]!
+  createdAt: DateTime! @createdAt
+  createdByUserId: ID! @id
+  updatedAt: DateTime @updatedAt
+  updatedByUserId: ID! @id
+  jobsCreated: [Job] @relation(link: INLINE)
+  tags: [ScoredTag]
+}
+
+
+type Member @embedded {
+  user: User!  @relation(link: INLINE)
+  role: RoleType!
+  noticePeriod: Int
+  availableAt: DateTime
+}
+
+
+type Job {
+  id: ID! @id
+  enabled: Boolean! @default(value: false)
+  name: String!
+  header: String
+  description: String
+  applications: [Team] 
+  createdAt: DateTime! @createdAt
+  createdByUserId: ID! @id
+  updatedAt: DateTime @updatedAt
+  updatedByUserId: ID! @id
+  tags: [ScoredTag]
+}
+
+type SocialAccount @embedded {  
+  externalId: String!
+  type: SocialAccountType!
+}
+
+type ScoredTag @embedded {  
+  score: Int
+  tag: Tag @relation(link: INLINE)
+}
+
+type Tag {
+  id: ID! @id
+  name: String!
+}

@@ -1,12 +1,20 @@
 {
   "name": "teampot-backend",
   "version": "1.0.0",
-  "private": true,
+  "description": "Teampot service backend",
+  "main": "index.js",
+  "scripts": {    
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "apollo-server-express": "^2.2.2",
-    "express": "^4.16.4",
-    "graphql": "^14.1.1",
-    "graphql-tools": "^4.0.3",
-    "mongoose": "^5.4.5"
+    "graphql-yoga": "^1.17.1",
+    "prisma-client-lib": "^1.25.7"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.92.0",
+    "flow-remove-types": "^1.2.3"
   }
 }

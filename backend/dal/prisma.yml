@@ -1,0 +1,9 @@
+endpoint: http://localhost:4466
+datamodel: datamodel.prisma
+databaseType: document
+generate:
+  - generator: flow-client
+    output: ./_datamodel/prisma-client/
+hooks:
+  post-deploy:
+    - prisma generate
