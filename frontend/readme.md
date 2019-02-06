@@ -26,5 +26,7 @@ npm run flow
 ```bash
 npm run start
 ```
-If the flow is complaining about "import someType from 'something'" you can generate a stub for the 'something'
+### If the flow is complaining about "import someType from 'something'" you can generate a stub for the 'something'
+```bash
 flow-typed create-stub something
+```
