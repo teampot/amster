@@ -14,6 +14,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/styles';
+import Router from 'next/router';
+import Link from 'next/link';
 
 const useStyles = makeStyles(theme => ({
   main: {
@@ -81,6 +83,16 @@ function SignIn(props) {
             className={classes.submit}
           >
             Sign in
+          </Button>
+          <Button
+            onClick={() => Router.push('/')}
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="secondary"
+            className={classes.submit}
+          >
+            Back
           </Button>
         </form>
       </Paper>

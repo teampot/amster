@@ -13,7 +13,7 @@ import { makeStyles } from '@material-ui/styles';
 import Link from 'next/link';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-
+import Router from 'next/router';
 
 export const query = gql`
 {
@@ -58,11 +58,15 @@ function Index() {
       <Typography variant="subtitle1" gutterBottom>
         example project
       </Typography>
-      <Typography gutterBottom>
-        <Link href="/about">
-          <a>Go to the about page</a>
-        </Link>
-      </Typography>
+      <Button
+        onClick={() => Router.push('/sign-in')}
+        type="submit"
+        variant="contained"
+        color="primary"
+        className={classes.submit}
+          >
+          Sign in
+      </Button>
       <Button variant="contained" color="secondary" onClick={handleClick}>
         Super Secret Password
       </Button>
