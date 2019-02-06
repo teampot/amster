@@ -1,13 +1,13 @@
 
+// @flow
 import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost';
 import { makeExecutableSchema } from 'graphql-tools';
 import { SchemaLink } from 'apollo-link-schema';
 import fetch from 'isomorphic-unfetch';
 import process from 'process';
 
-const { resolvers } = require('./mocks/resolvers.js');
-const { gql } = require('apollo-server-express');
-const { typeDefs } = require('./mocks/schema.js');
+import { resolvers } from './mocks/resolvers.js';
+import { typeDefs } from './mocks/schema.js';
 
 
 let apolloClient = null
@@ -28,7 +28,7 @@ if (!process.browser) {
   global.fetch = fetch
 }
 
-function create (initialState) {
+function create (initialState: any) {
   // Check out https://github.com/zeit/next.js/pull/4611 if you want to use the AWSAppSyncClient
   return new ApolloClient({
     connectToDevTools: process.browser,
@@ -38,7 +38,7 @@ function create (initialState) {
   })
 }
 
-export default function initApollo (initialState) {
+export default function initApollo (initialState:any) {
   // Make sure to create a new client for every server-side request so that data
   // isn't shared between connections (which would be bad)
   if (!process.browser) {

@@ -1,12 +1,17 @@
+// @flow
 import React from 'react'
 import initApollo from './init-apollo'
 import Head from 'next/head'
 import { getDataFromTree } from 'react-apollo'
+import { ApolloClient } from 'apollo-client';
 
-export default (App) => {
-  return class Apollo extends React.Component {
+type Props = {};
+
+export default (App: any) => {
+  return class Apollo extends React.Component<Props> {
+    
     static displayName = 'withApollo(App)'
-    static async getInitialProps (ctx) {
+    static async getInitialProps (ctx: any) {
       const { Component, router } = ctx
 
       let appProps = {}
@@ -16,8 +21,8 @@ export default (App) => {
 
       // Run all GraphQL queries in the component tree
       // and extract the resulting data
-      const apollo = initApollo()
-      if (!process.browser) {
+      const apollo = initApollo();
+      if (!(process:any).browser) {
         try {
           // Run all GraphQL queries
           await getDataFromTree(
@@ -49,7 +54,9 @@ export default (App) => {
       }
     }
 
-    constructor (props) {
+    apolloClient = null;
+
+    constructor (props: any) {
       super(props)
       this.apolloClient = initApollo(props.apolloState)
     }

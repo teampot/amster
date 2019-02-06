@@ -1,3 +1,4 @@
+// @flow
 const { gql } = require('apollo-server-express');
 
 export const user_mutation = gql`
