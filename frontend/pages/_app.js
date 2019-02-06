@@ -6,8 +6,9 @@ import Head from 'next/head';
 import { StylesProvider, ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import getPageContext from '../src/getPageContext';
-import { ApolloProvider } from 'react-apollo'
-import withApolloClient from '../src/with-apollo-client'
+import { ApolloProvider } from 'react-apollo';
+import withApolloClient from '../src/with-apollo-client';
+import PrimarySearchAppBar from '../components/organisms/appBar';
 
 class MyApp extends App {
   constructor() {
@@ -29,7 +30,7 @@ class MyApp extends App {
       <Container>
         <ApolloProvider client={apolloClient}>
           <Head>
-            <title>My page</title>
+            <title>Team Pot</title>
           </Head>
           {/* Wrap every page in Styles and Theme providers */}
           <StylesProvider
@@ -44,6 +45,7 @@ class MyApp extends App {
               <CssBaseline />
               {/* Pass pageContext to the _document though the renderPage enhancer
                 to render collected styles on server-side. */}
+              <PrimarySearchAppBar />
               <Component pageContext={this.pageContext} {...pageProps} />
             </ThemeProvider>
           </StylesProvider>

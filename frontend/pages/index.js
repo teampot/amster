@@ -53,7 +53,7 @@ function Index() {
         </DialogActions>
       </Dialog>
       <Typography variant="h4" gutterBottom>
-        Material-UI
+      TEAMPOT
       </Typography>
       <Typography variant="subtitle1" gutterBottom>
         example project

@@ -20,7 +20,7 @@ function About() {
   return (
     <div className={classes.root}>
       <Typography variant="h4" gutterBottom>
-        Material-UI
+        TEAMPOT
       </Typography>
       <Typography variant="subtitle1" gutterBottom>
         about page
