@@ -104,15 +104,11 @@ function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-  const [state, setState] = React.useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
-  });
+  const [leftDrawer, setLeftDrawer] = React.useState();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const isLeftDrawerOpen = Boolean(leftDrawer);
 
   function handleProfileMenuOpen(event) {
     setAnchorEl(event.currentTarget);
@@ -131,8 +127,8 @@ function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   }
 
-  const toggleDrawer = (side, open) => () => {
-    setState({ ...state, [side]: open });
+  const toggleDrawer = () => () => {
+    setLeftDrawer(!isLeftDrawerOpen);
   };
 
   const sideList = (
@@ -207,7 +203,7 @@ function PrimarySearchAppBar() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton onClick={toggleDrawer('left', true)} className={classes.menuButton} color="inherit" aria-label="Open drawer">
+          <IconButton onClick={toggleDrawer()} className={classes.menuButton} color="inherit" aria-label="Open drawer">
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" color="inherit" noWrap>
@@ -253,8 +249,8 @@ function PrimarySearchAppBar() {
           </div>
         </Toolbar>
       </AppBar>
-      <Drawer open={state.left} onClose={toggleDrawer('left', false)}>
-        <div tabIndex={0} role="button" onClick={toggleDrawer('left', false)} onKeyDown={toggleDrawer('left', false)}>
+      <Drawer open={isLeftDrawerOpen} onClose={toggleDrawer()}>
+        <div tabIndex={0} role="button" onClick={toggleDrawer()} onKeyDown={toggleDrawer()}>
           {sideList}
         </div>
       </Drawer>
