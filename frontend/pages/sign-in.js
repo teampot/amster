@@ -88,8 +88,4 @@ function SignIn(props) {
   );
 }
 
-SignIn.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
 export default SignIn;
