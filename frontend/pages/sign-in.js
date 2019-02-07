@@ -84,16 +84,17 @@ function SignIn(props) {
           >
             Sign in
           </Button>
-          <Button
-            onClick={() => Router.push('/')}
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="secondary"
-            className={classes.submit}
-          >
-            Back
-          </Button>
+          <Link href="/">
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="secondary"
+              className={classes.submit}
+            >
+              Back
+            </Button>
+          </Link>
         </form>
       </Paper>
     </main>
