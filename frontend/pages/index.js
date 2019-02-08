@@ -17,7 +17,7 @@ import gql from 'graphql-tag';
 
 export const query = gql`
 {
-	me{id}
+	me{id,firstName,lastName}
 }
 `;
 
@@ -67,8 +67,7 @@ function Index() {
         Super Secret Password
       </Button>
       <Query query={query}>
-      {({ loading, error, data: { allUsers } }) => {
-        debugger;
+      {({ loading, error, data: { me } }) => {
         if (error) return <span>Error.</span>
         if (loading) return <div>Loading.</div>
         return (
@@ -76,9 +75,7 @@ function Index() {
             <h1>Below users are rendered from apollo graphql:</h1>
             
             <ul>
-              {allUsers.map((user) => (
-                <li>{user.FirstName + ' ' + user.FirstName}</li>
-              ))}
+            <li>{me.firstName + ' ' + me.lastName}</li>
             </ul>
           </section>
         )
