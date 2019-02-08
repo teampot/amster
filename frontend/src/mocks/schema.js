@@ -1,5 +1,6 @@
-const { gql } = require('apollo-server-express');
-const typeDefs = gql`
+// @flow
+import gql from 'graphql-tag';
+export const typeDefs = gql`
 #TYPES#####################################
   scalar Date
   
@@ -155,5 +156,3 @@ const typeDefs = gql`
     mutation: RootMutation
   }
 `;
-
-module.exports.typeDefs = typeDefs;

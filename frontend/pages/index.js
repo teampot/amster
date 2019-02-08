@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import '../src/bootstrap';
 // --- Post bootstrap -----
 import React from 'react';
@@ -16,7 +15,7 @@ import gql from 'graphql-tag';
 
 export const query = gql`
 {
-	me{id}
+	me{id,firstName,lastName}
 }
 `;
 
@@ -72,7 +71,6 @@ function Index() {
       </Button>
       {/* <Query query={query}>
       {({ loading, error, data: { allUsers } }) => {
-        debugger;
         if (error) return <span>Error.</span>
         if (loading) return <div>Loading.</div>
         return (
@@ -80,9 +78,7 @@ function Index() {
             <h1>Below users are rendered from apollo graphql:</h1>
             
             <ul>
-              {allUsers.map((user) => (
-                <li>{user.FirstName + ' ' + user.FirstName}</li>
-              ))}
+            <li>{me.firstName + ' ' + me.lastName}</li>
             </ul>
           </section>
         )

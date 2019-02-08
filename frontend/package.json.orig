@@ -8,7 +8,6 @@
     "@material-ui/styles": "^3.0.0-alpha.10",
     "apollo-boost": "^0.1.27",
     "apollo-client": "^2.4.3",
-    "apollo-link-http": "^1.5.5",
     "flow-typed": "^2.5.1",
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1",
@@ -19,22 +18,27 @@
     "prop-types": "^15.6.2",
     "react": "^16.8.0",
     "react-apollo": "^2.4.1",
-    "react-dom": "^16.8.0",
-    "react-scripts": "^2.1.3"
+<<<<<<< HEAD
+    "react-dom": "^16.8.0"
+=======
+    "react-dom": "next",
+    "react-scripts": "^2.1.3",
+    "apollo-link-http": "^1.5.5"
+>>>>>>> dev
   },
   "scripts": {
-    "install": "npm install flow-typed",
-    "typed": "flow-typed install",
+    "install":"npm install flow-typed",
+    "typed":"flow-typed install",
     "dev": "next",
     "build": "next build",
     "flow": "flow",
     "start": "next start"
   },
   "devDependencies": {
-    "apollo-link-schema": "^1.1.6",
     "babel-eslint": "8.2.6",
-    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-plugin-transform-flow-strip-types": "6.22.0",
     "flow-bin": "0.77.0",
+    "apollo-link-schema": "^1.1.6",
     "fs": "^0.0.1-security"
   }
 }
