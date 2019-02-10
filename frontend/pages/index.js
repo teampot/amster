@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import '../src/bootstrap';
 // --- Post bootstrap -----
 import React from 'react';
@@ -13,7 +12,6 @@ import { makeStyles } from '@material-ui/styles';
 import Link from 'next/link';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-
 
 export const query = gql`
 {
@@ -53,21 +51,26 @@ function Index() {
         </DialogActions>
       </Dialog>
       <Typography variant="h4" gutterBottom>
-        Material-UI
+      TEAMPOT
       </Typography>
       <Typography variant="subtitle1" gutterBottom>
         example project
       </Typography>
-      <Typography gutterBottom>
-        <Link href="/about">
-          <a>Go to the about page</a>
-        </Link>
-      </Typography>
+      <Link href="/sign-in" prefetch>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+            >
+            Sign in
+        </Button>
+      </Link>
       <Button variant="contained" color="secondary" onClick={handleClick}>
         Super Secret Password
       </Button>
-      <Query query={query}>
-      {({ loading, error, data: { me } }) => {
+      {/* <Query query={query}>
+      {({ loading, error, data: { allUsers } }) => {
         if (error) return <span>Error.</span>
         if (loading) return <div>Loading.</div>
         return (
@@ -80,7 +83,7 @@ function Index() {
           </section>
         )
       }}
-    </Query>     
+    </Query>      */}
     </div>
   );
 }
