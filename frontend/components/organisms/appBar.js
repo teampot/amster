@@ -22,6 +22,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -154,49 +155,53 @@ function PrimarySearchAppBar() {
   );
 
   const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
+    // <Menu
+    //   anchorEl={anchorEl}
+    //   anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+    //   transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+    //   open={isMenuOpen}
+    //   onClose={handleMenuClose}
+    // >
+    //   <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+    //   <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+    // </Menu>
+    <Button color="inherit">Login</Button>
+    
   );
 
   const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton color="inherit">
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
+    // <Menu
+    //   anchorEl={mobileMoreAnchorEl}
+    //   anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+    //   transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+    //   open={isMobileMenuOpen}
+    //   onClose={handleMobileMenuClose}
+    // >
+    //   <MenuItem>
+    //     <IconButton color="inherit">
+    //       <Badge badgeContent={4} color="secondary">
+    //         <MailIcon />
+    //       </Badge>
+    //     </IconButton>
+    //     <p>Messages</p>
+    //   </MenuItem>
+    //   <MenuItem>
+    //     <IconButton color="inherit">
+    //       <Badge badgeContent={11} color="secondary">
+    //         <NotificationsIcon />
+    //       </Badge>
+    //     </IconButton>
+    //     <p>Notifications</p>
+    //   </MenuItem>
+    //   <MenuItem onClick={handleProfileMenuOpen}>
+    //     <IconButton color="inherit">
+    //       <AccountCircle />
+    //     </IconButton>
+    //     <p>Profile</p>
+    //   </MenuItem>
+    // </Menu>
+    <Button color="inherit">Login</Button>
+ 
   );
 
   return (

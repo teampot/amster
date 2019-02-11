@@ -30,3 +30,7 @@ npm run start
 ```bash
 flow-typed create-stub something
 ```
+#### For example:
+```bash
+flow-typed create-stub @material-ui/core/DialogTitle@3.9.2 --overwrite
+```

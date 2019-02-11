@@ -1,3 +1,4 @@
+// @flow
 import '../src/bootstrap';
 // --- Post bootstrap -----
 import React from 'react';
@@ -28,7 +29,7 @@ const useStyles = makeStyles(theme => ({
 
 function Index() {
   const classes = useStyles();
-  const [open, setState] = React.useState(false);
+  const [open, setState] = (React: any).useState(false);
 
   const handleClose = () => {
     setState(false);
@@ -61,6 +62,7 @@ function Index() {
           type="submit"
           variant="contained"
           color="primary"
+          // @ts-ignore
           className={classes.submit}
             >
             Sign in
