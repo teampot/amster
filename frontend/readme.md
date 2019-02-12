@@ -34,3 +34,8 @@ flow-typed create-stub something
 ```bash
 flow-typed create-stub @material-ui/core/DialogTitle@3.9.2 --overwrite
 ```
+
+## Debugging Next.js
+### Install VS Code - Debugger for Chrome extension
+### https://github.com/Lemoncode/nextjs-typescript-by-sample/tree/master/08-debugging
+### https://github.com/Microsoft/vscode-recipes/tree/master/Next-js

@@ -33,6 +33,7 @@ function createPageContext() {
     sheetsRegistry: new SheetsRegistry(),
     // The standard class name generator.
     generateClassName: createGenerateClassName(),
+    user:{id:10,firstName:'John'}
   };
 }
 

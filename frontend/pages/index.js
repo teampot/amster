@@ -13,6 +13,8 @@ import { makeStyles } from '@material-ui/styles';
 import Link from 'next/link';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import getPageContext from '../src/getPageContext';
+
 
 export const query = gql`
 {
@@ -29,6 +31,8 @@ const useStyles = makeStyles(theme => ({
 
 function Index() {
   const classes = useStyles();
+  const pageContext = getPageContext();
+  
   const [open, setState] = (React: any).useState(false);
 
   const handleClose = () => {
