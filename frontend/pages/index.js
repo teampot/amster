@@ -33,7 +33,7 @@ function Index() {
   const classes = useStyles();
   const pageContext = getPageContext();
   
-  const [open, setState] = (React: any).useState(false);
+  const [open, setState] = React.useState(false);
 
   const handleClose = () => {
     setState(false);

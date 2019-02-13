@@ -9,11 +9,37 @@ import getPageContext from '../src/getPageContext';
 import { ApolloProvider } from 'react-apollo';
 import withApolloClient from '../src/with-apollo-client';
 import PrimarySearchAppBar from '../components/organisms/appBar';
+import fetch from 'isomorphic-unfetch';
+import Cookies from '../src/auth/cookies';
 
-class MyApp extends App {
+class TeampotApp extends App {
   constructor() {
     super();
     this.pageContext = getPageContext();
+  }
+
+  static async getInitialProps({ Component, router, ctx, req }) {
+    let pageContext = getPageContext();
+    if (ctx) {
+      let cookies = new Cookies(ctx);
+      if (!cookies.auth_token) {
+              ctx.res.writeHeader(302,
+                      {
+                        Location : `https://www.linkedin.com/oauth/v2/authorization` +
+                        `?client_id=78srd5euhjejck` + 
+                        `&response_type=code` +
+                        `&redirect_uri=${encodeURIComponent('http://localhost:3000')}` + 
+                        `&scope=r_fullprofile%20r_emailaddress%20w_share`
+                      });
+                      
+          ctx.res.end();
+          return {};
+      }
+    }
+    console.log(ctx.req);
+    const res = await fetch('https://api.github.com/repos/zeit/next.js');
+    const json = await res.json();
+    return { stars: json.stargazers_count };
   }
 
   componentDidMount() {
@@ -53,6 +79,6 @@ class MyApp extends App {
       </Container>
     );
   }
-}
+};
 
-export default withApolloClient(MyApp)
+export default withApolloClient(TeampotApp);
