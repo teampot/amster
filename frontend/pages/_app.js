@@ -20,26 +20,54 @@ class TeampotApp extends App {
 
   static async getInitialProps({ Component, router, ctx, req }) {
     let pageContext = getPageContext();
-    if (ctx) {
-      let cookies = new Cookies(ctx);
-      if (!cookies.auth_token) {
-              ctx.res.writeHeader(302,
-                      {
-                        Location : `https://www.linkedin.com/oauth/v2/authorization` +
-                        `?client_id=78srd5euhjejck` + 
-                        `&response_type=code` +
-                        `&redirect_uri=${encodeURIComponent('http://localhost:3000')}` + 
-                        `&scope=r_fullprofile%20r_emailaddress%20w_share`
-                      });
-                      
-          ctx.res.end();
-          return {};
+    // server side
+    if (ctx.req && !pageContext.auth_token) {
+      if (ctx && ctx.query && ctx.query.code) {
+        //let cookies = new Cookies(ctx);
+        try {
+            let response = await fetch(`https://www.linkedin.com/oauth/v2/accessToken`, {
+              method: "post",
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded'
+              },
+              body: `grant_type=authorization_code` + 
+              `&code=${encodeURIComponent(ctx.query.code)}` + 
+              `&redirect_uri=${encodeURIComponent('http://localhost:3000')}` + 
+              `&client_id=78srd5euhjejck` + 
+              `&client_secret=WaCqNVqzoyP5CyML`
+            });
+            pageContext.auth_token = await response.json();
+
+        } catch (error) {
+          console.log(error);
+        }
+
+        if (pageContext.auth_token && !pageContext.me) {
+          let response = await fetch('https://api.linkedin.com/v2/me', {
+              headers: {
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${pageContext.auth_token.access_token}`
+              },
+          });
+          pageContext.me = await response.json();
+        }
+        
+        return pageContext;
       }
+
+      ctx.res.writeHeader(302,
+            {
+              Location : `https://www.linkedin.com/oauth/v2/authorization` +
+              `?client_id=78srd5euhjejck` + 
+              `&response_type=code` +
+              `&redirect_uri=http://localhost:3000` + 
+              `&scope=r_basicprofile w_share r_emailaddress`
+            });
+                    
+      ctx.res.end();
     }
-    console.log(ctx.req);
-    const res = await fetch('https://api.github.com/repos/zeit/next.js');
-    const json = await res.json();
-    return { stars: json.stargazers_count };
+    return {};
   }
 
   componentDidMount() {
