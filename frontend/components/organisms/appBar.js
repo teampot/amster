@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -21,8 +21,16 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
+import PowerSettingsNew from '@material-ui/icons/PowerSettingsNew'
 import Button from '@material-ui/core/Button';
+import Hidden from '@material-ui/core/Hidden';
+import Group from '@material-ui/icons/Group';
+import GroupWork from '@material-ui/icons/GroupWork';
+import Info from '@material-ui/icons/Info';
+import { withRouter } from 'next/router'
+import getPageContext from '../../src/getPageContext';
+
+const pageContext = getPageContext();
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -30,6 +38,9 @@ const useStyles = makeStyles(theme => ({
   },
   grow: {
     flexGrow: 1,
+  },
+  button: {
+    margin: theme.spacing.unit,
   },
   menuButton: {
     marginLeft: -12,
@@ -100,7 +111,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function PrimarySearchAppBar() {
+
+
+function PrimarySearchAppBar({ router }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -111,106 +124,130 @@ function PrimarySearchAppBar() {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const isLeftDrawerOpen = Boolean(leftDrawer);
 
-  function handleProfileMenuOpen(event) {
+  function handleProfileMenuOpen(event, route) {
     setAnchorEl(event.currentTarget);
   }
 
-  function handleMobileMenuClose() {
+  function handleMobileMenuClose(route) {
     setMobileMoreAnchorEl(null);
+    if (typeof(route) === 'string') router.push(route);
   }
 
-  function handleMenuClose() {
+  function handleMenuClose(route) {
     setAnchorEl(null);
-    handleMobileMenuClose();
+    handleMobileMenuClose(route);
   }
 
   function handleMobileMenuOpen(event) {
     setMobileMoreAnchorEl(event.currentTarget);
   }
 
+  function logout() {
+    debugger;
+    pageContext.user = null;
+    router.push('/teams');
+  };
+
   const toggleDrawer = () => () => {
     setLeftDrawer(!isLeftDrawerOpen);
   };
 
+  // Similar to componentDidMount and componentDidUpdate:
+  useEffect(() => {
+    router.prefetch('/teams');
+    router.prefetch('/jobs');
+    router.prefetch('/team');
+    router.prefetch('/about');
+    router.prefetch('/profile');
+    router.prefetch('/messages');
+    router.prefetch('/notifications');
+  }, [false]);
+
   const sideList = (
     <div className={classes.list}>
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
+          <ListItem onClick={() => setTimeout(() => router.push('/teams'),0)}>
+            <ListItemIcon><Group/></ListItemIcon>
+            <ListItemText primary={'Teams'} />
           </ListItem>
-        ))}
+          <ListItem onClick={() => setTimeout(() => router.push('/jobs'),0)}>
+            <ListItemIcon><GroupWork/></ListItemIcon>
+            <ListItemText primary={'Jobs'} />
+          </ListItem>
       </List>
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
+          <ListItem onClick={() => setTimeout(() => router.push('/about'),0)}>
+            <ListItemIcon><Info/></ListItemIcon>
+            <ListItemText primary={'About'} />
           </ListItem>
-        ))}
       </List>
     </div>
   );
 
   const renderMenu = (
-    // <Menu
-    //   anchorEl={anchorEl}
-    //   anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-    //   transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-    //   open={isMenuOpen}
-    //   onClose={handleMenuClose}
-    // >
-    //   <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-    //   <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    // </Menu>
-    <Button color="inherit">Login</Button>
-    
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={() => setTimeout(() => handleMenuClose('/profile'), 0)}>Profile</MenuItem>
+      <MenuItem onClick={() => setTimeout(() => handleMenuClose('/teams'), 0)}>Log out</MenuItem>
+    </Menu>
   );
 
   const renderMobileMenu = (
-    // <Menu
-    //   anchorEl={mobileMoreAnchorEl}
-    //   anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-    //   transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-    //   open={isMobileMenuOpen}
-    //   onClose={handleMobileMenuClose}
-    // >
-    //   <MenuItem>
-    //     <IconButton color="inherit">
-    //       <Badge badgeContent={4} color="secondary">
-    //         <MailIcon />
-    //       </Badge>
-    //     </IconButton>
-    //     <p>Messages</p>
-    //   </MenuItem>
-    //   <MenuItem>
-    //     <IconButton color="inherit">
-    //       <Badge badgeContent={11} color="secondary">
-    //         <NotificationsIcon />
-    //       </Badge>
-    //     </IconButton>
-    //     <p>Notifications</p>
-    //   </MenuItem>
-    //   <MenuItem onClick={handleProfileMenuOpen}>
-    //     <IconButton color="inherit">
-    //       <AccountCircle />
-    //     </IconButton>
-    //     <p>Profile</p>
-    //   </MenuItem>
-    // </Menu>
-    <Button color="inherit">Login</Button>
- 
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      <MenuItem onClick={(e) => setTimeout(() => handleMenuClose('/profile'), 0)}>
+        <IconButton color="inherit">
+          <AccountCircle />
+        </IconButton>
+        <p>Profile</p>
+      </MenuItem>
+      <MenuItem onClick={() => setTimeout(() => handleMenuClose('/messages'), 0)}>
+        <IconButton color="inherit">
+          <Badge badgeContent={4} color="secondary">
+            <MailIcon />
+          </Badge>
+        </IconButton>
+        <p>Messages</p>
+      </MenuItem>
+      <MenuItem onClick={() => setTimeout(() => handleMenuClose('/notifications'), 0)}>
+        <IconButton color="inherit">
+          <Badge badgeContent={11} color="secondary">
+            <NotificationsIcon />
+          </Badge>
+        </IconButton>
+        <p>Notifications</p>
+      </MenuItem>
+      <Hidden mdUp>
+        <MenuItem onClick={() => setTimeout(() => handleMenuClose("/teams"), 0)}>
+          <IconButton color="inherit">
+            <PowerSettingsNew />
+          </IconButton>
+          <p>Logout</p>
+        </MenuItem>
+      </Hidden>
+    </Menu>
   );
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton onClick={toggleDrawer()} className={classes.menuButton} color="inherit" aria-label="Open drawer">
-            <MenuIcon />
-          </IconButton>
+          <Hidden smUp>
+            <IconButton onClick={toggleDrawer()} className={classes.menuButton} color="inherit" aria-label="Open drawer">
+              <MenuIcon />
+            </IconButton>
+          </Hidden>
           <Typography className={classes.title} variant="h6" color="inherit" noWrap>
             Teampot
           </Typography>
@@ -226,14 +263,19 @@ function PrimarySearchAppBar() {
               }}
             />
           </div>
+          <Hidden xsDown>
+            <Button color="inherit" onClick={() => setTimeout(() => router.push('/teams'),0)}>Teams</Button>
+            <Button color="inherit" onClick={() => setTimeout(() => router.push('/jobs'),0)}>Jobs</Button>
+            <Button color="inherit" onClick={() => setTimeout(() => router.push('/about'),0)}>About</Button>
+          </Hidden>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton color="inherit">
+            <IconButton onClick={() => setTimeout(() => router.push('/messages'),0)} color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />
               </Badge>
             </IconButton>
-            <IconButton color="inherit">
+            <IconButton onClick={() => setTimeout(() => router.push('/notifications'),0)} color="inherit">
               <Badge badgeContent={17} color="secondary">
                 <NotificationsIcon />
               </Badge>
@@ -259,10 +301,12 @@ function PrimarySearchAppBar() {
           {sideList}
         </div>
       </Drawer>
-      {renderMenu}
+      <Hidden xsDown>
+        {renderMenu}
+      </Hidden>
       {renderMobileMenu}
     </div>
   );
 }
 
-export default PrimarySearchAppBar;
+export default withRouter(PrimarySearchAppBar);

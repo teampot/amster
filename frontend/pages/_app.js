@@ -11,63 +11,77 @@ import withApolloClient from '../src/with-apollo-client';
 import PrimarySearchAppBar from '../components/organisms/appBar';
 import fetch from 'isomorphic-unfetch';
 import Cookies from '../src/auth/cookies';
+import getConfig from 'next/config'
 
+// from next.config.js.
+const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
 class TeampotApp extends App {
   constructor() {
     super();
     this.pageContext = getPageContext();
   }
 
-  static async getInitialProps({ Component, router, ctx, req }) {
-    let pageContext = getPageContext();
-    // server side
-    if (ctx.req && !pageContext.auth_token) {
-      if (ctx && ctx.query && ctx.query.code) {
-        //let cookies = new Cookies(ctx);
-        try {
-            let response = await fetch(`https://www.linkedin.com/oauth/v2/accessToken`, {
-              method: "post",
-              headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/x-www-form-urlencoded'
-              },
-              body: `grant_type=authorization_code` + 
-              `&code=${encodeURIComponent(ctx.query.code)}` + 
-              `&redirect_uri=${encodeURIComponent('http://localhost:3000')}` + 
-              `&client_id=78srd5euhjejck` + 
-              `&client_secret=WaCqNVqzoyP5CyML`
-            });
-            pageContext.auth_token = await response.json();
+  static async getInitialProps({ Component, ctx }) {
+    let pageProps = {}
 
-        } catch (error) {
-          console.log(error);
-        }
-
-        if (pageContext.auth_token && !pageContext.me) {
-          let response = await fetch('https://api.linkedin.com/v2/me', {
-              headers: {
-                'Accept': 'application/json',
-                'Authorization': `Bearer ${pageContext.auth_token.access_token}`
-              },
-          });
-          pageContext.me = await response.json();
-        }
-        
-        return pageContext;
-      }
-
-      ctx.res.writeHeader(302,
-            {
-              Location : `https://www.linkedin.com/oauth/v2/authorization` +
-              `?client_id=78srd5euhjejck` + 
-              `&response_type=code` +
-              `&redirect_uri=http://localhost:3000` + 
-              `&scope=r_basicprofile w_share r_emailaddress`
-            });
-                    
-      ctx.res.end();
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps(ctx)
     }
-    return {};
+
+    if (ctx.req) {
+      let pageContext = getPageContext();
+      pageContext.user = {id: 10,firstName: 'John'};
+    }
+
+    return { pageProps };
+
+    // server side
+    // if (ctx.req && !pageContext.auth_token) {
+    //   if (ctx && ctx.query && ctx.query.code) {
+    //     //let cookies = new Cookies(ctx);
+    //     try {
+    //         let response = await fetch(`https://www.linkedin.com/oauth/v2/accessToken`, {
+    //           method: "post",
+    //           headers: {
+    //             'Accept': 'application/json',
+    //             'Content-Type': 'application/x-www-form-urlencoded'
+    //           },
+    //           body: `grant_type=authorization_code` + 
+    //           `&code=${encodeURIComponent(ctx.query.code)}` + 
+    //           `&redirect_uri=${encodeURIComponent('http://localhost:3000')}` + 
+    //           `&client_id=${serverRuntimeConfig.lnClientId}` + 
+    //           `&client_secret=${serverRuntimeConfig.lnSecret}`
+    //         });
+    //         pageContext.auth_token = await response.json();
+
+    //     } catch (error) {
+    //       console.log(error);
+    //     }
+
+    //     if (pageContext.auth_token && !pageContext.me) {
+    //       let response = await fetch('https://api.linkedin.com/v2/me', {
+    //           headers: {
+    //             'Accept': 'application/json',
+    //             'Authorization': `Bearer ${pageContext.auth_token.access_token}`
+    //           },
+    //       });
+    //       pageContext.me = await response.json();
+    //     }
+        
+    //     return pageContext;
+    //   }
+
+    //   ctx.res.writeHeader(302,
+    //         {
+    //           Location : `https://www.linkedin.com/oauth/v2/authorization` +
+    //           `?client_id=${serverRuntimeConfig.lnClientId}` + 
+    //           `&response_type=code` +
+    //           `&redirect_uri=http://localhost:3000` + 
+    //           `&scope=r_liteprofile w_share r_emailaddress`
+    //         });
+                    
+    //   ctx.res.end();
+    // }
   }
 
   componentDidMount() {
@@ -84,7 +98,7 @@ class TeampotApp extends App {
       <Container>
         <ApolloProvider client={apolloClient}>
           <Head>
-            <title>Team Pot</title>
+            <title>Teampot</title>
           </Head>
           {/* Wrap every page in Styles and Theme providers */}
           <StylesProvider
