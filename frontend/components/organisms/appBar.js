@@ -38,7 +38,10 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
   },
   home: {
-    marginRight: 10
+    marginRight: 10,
+    [theme.breakpoints.down('xs')]: {
+      marginLeft: -25,
+    },
   },
   grow: {
     flexGrow: 1,
@@ -146,12 +149,6 @@ function PrimarySearchAppBar({ router }) {
     setMobileMoreAnchorEl(event.currentTarget);
   }
 
-  function logout() {
-    debugger;
-    pageContext.user = null;
-    router.push('/teams');
-  };
-
   const toggleDrawer = () => () => {
     setLeftDrawer(!isLeftDrawerOpen);
   };
@@ -160,6 +157,8 @@ function PrimarySearchAppBar({ router }) {
   useEffect(() => {
     router.prefetch('/teams');
     router.prefetch('/jobs');
+    router.prefetch('/job');
+    router.prefetch('/teams');
     router.prefetch('/team');
     router.prefetch('/about');
     router.prefetch('/profile');
