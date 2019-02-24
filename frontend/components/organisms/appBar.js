@@ -27,14 +27,18 @@ import Hidden from '@material-ui/core/Hidden';
 import Group from '@material-ui/icons/Group';
 import GroupWork from '@material-ui/icons/GroupWork';
 import Info from '@material-ui/icons/Info';
-import { withRouter } from 'next/router'
+import { withRouter } from 'next/router';
 import getPageContext from '../../src/getPageContext';
+import ActionHome from '../atoms/ActionHome'
 
 const pageContext = getPageContext();
 
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
+  },
+  home: {
+    marginRight: 10
   },
   grow: {
     flexGrow: 1,
@@ -50,7 +54,7 @@ const useStyles = makeStyles(theme => ({
     display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
-    },
+    }
   },
   search: {
     position: 'relative',
@@ -166,18 +170,18 @@ function PrimarySearchAppBar({ router }) {
   const sideList = (
     <div className={classes.list}>
       <List>
-          <ListItem onClick={() => setTimeout(() => router.push('/teams'),0)}>
+          <ListItem onClick={() => setTimeout(() => { router.push('/teams') }, 0)}>
             <ListItemIcon><Group/></ListItemIcon>
             <ListItemText primary={'Teams'} />
           </ListItem>
-          <ListItem onClick={() => setTimeout(() => router.push('/jobs'),0)}>
+          <ListItem onClick={() => setTimeout(() => { router.push('/jobs') }, 0)}>
             <ListItemIcon><GroupWork/></ListItemIcon>
             <ListItemText primary={'Jobs'} />
           </ListItem>
       </List>
       <Divider />
       <List>
-          <ListItem onClick={() => setTimeout(() => router.push('/about'),0)}>
+          <ListItem onClick={() => setTimeout(() => { router.push('/about') }, 0)}>
             <ListItemIcon><Info/></ListItemIcon>
             <ListItemText primary={'About'} />
           </ListItem>
@@ -193,8 +197,8 @@ function PrimarySearchAppBar({ router }) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={() => setTimeout(() => handleMenuClose('/profile'), 0)}>Profile</MenuItem>
-      <MenuItem onClick={() => setTimeout(() => handleMenuClose('/teams'), 0)}>Log out</MenuItem>
+      <MenuItem onClick={() => setTimeout(() => { handleMenuClose('/profile') }, 0)}>Profile</MenuItem>
+      <MenuItem onClick={() => setTimeout(() => { handleMenuClose('/teams') }, 0)}>Log out</MenuItem>
     </Menu>
   );
 
@@ -206,13 +210,13 @@ function PrimarySearchAppBar({ router }) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem onClick={(e) => setTimeout(() => handleMenuClose('/profile'), 0)}>
+      <MenuItem onClick={(e) => setTimeout(() => { handleMenuClose('/profile') }, 0)}>
         <IconButton color="inherit">
           <AccountCircle />
         </IconButton>
         <p>Profile</p>
       </MenuItem>
-      <MenuItem onClick={() => setTimeout(() => handleMenuClose('/messages'), 0)}>
+      <MenuItem onClick={() => setTimeout(() => { handleMenuClose('/messages')}, 0)}>
         <IconButton color="inherit">
           <Badge badgeContent={4} color="secondary">
             <MailIcon />
@@ -220,7 +224,7 @@ function PrimarySearchAppBar({ router }) {
         </IconButton>
         <p>Messages</p>
       </MenuItem>
-      <MenuItem onClick={() => setTimeout(() => handleMenuClose('/notifications'), 0)}>
+      <MenuItem onClick={() => setTimeout(() => { handleMenuClose('/notifications') }, 0)}>
         <IconButton color="inherit">
           <Badge badgeContent={11} color="secondary">
             <NotificationsIcon />
@@ -229,7 +233,7 @@ function PrimarySearchAppBar({ router }) {
         <p>Notifications</p>
       </MenuItem>
       <Hidden mdUp>
-        <MenuItem onClick={() => setTimeout(() => handleMenuClose("/teams"), 0)}>
+        <MenuItem onClick={() => setTimeout(() => { handleMenuClose("/teams") }, 0)}>
           <IconButton color="inherit">
             <PowerSettingsNew />
           </IconButton>
@@ -248,6 +252,9 @@ function PrimarySearchAppBar({ router }) {
               <MenuIcon />
             </IconButton>
           </Hidden>
+          <div className={classes.home}>
+            <ActionHome />
+          </div>
           <Typography className={classes.title} variant="h6" color="inherit" noWrap>
             Teampot
           </Typography>
@@ -264,18 +271,18 @@ function PrimarySearchAppBar({ router }) {
             />
           </div>
           <Hidden xsDown>
-            <Button color="inherit" onClick={() => setTimeout(() => router.push('/teams'),0)}>Teams</Button>
-            <Button color="inherit" onClick={() => setTimeout(() => router.push('/jobs'),0)}>Jobs</Button>
-            <Button color="inherit" onClick={() => setTimeout(() => router.push('/about'),0)}>About</Button>
+            <Button color="inherit" onClick={() => setTimeout(() => { router.push('/teams') }, 0) }>Teams</Button>
+            <Button color="inherit" onClick={() => setTimeout(() => { router.push('/jobs') }, 0) }>Jobs</Button>
+            <Button color="inherit" onClick={() => setTimeout(() => { router.push('/about') }, 0) }>About</Button>
           </Hidden>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton onClick={() => setTimeout(() => router.push('/messages'),0)} color="inherit">
+            <IconButton onClick={() => setTimeout(() => { router.push('/messages') }, 0) } color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />
               </Badge>
             </IconButton>
-            <IconButton onClick={() => setTimeout(() => router.push('/notifications'),0)} color="inherit">
+            <IconButton onClick={() => setTimeout(() => { router.push('/notifications') }, 0)} color="inherit">
               <Badge badgeContent={17} color="secondary">
                 <NotificationsIcon />
               </Badge>
