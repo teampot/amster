@@ -205,7 +205,7 @@ function PrimarySearchAppBar ({user, router})
       onClose={ handleMenuClose }
     >
       <MenuItem onClick={ () => setTimeout( () => { handleMenuClose( '/profile' ) }, 0 ) }>Profile</MenuItem>
-      <MenuItem onClick={ () => setTimeout( () => { handleMenuClose( '/teams' ) }, 0 ) }>Log out</MenuItem>
+      <MenuItem onClick={ () => setTimeout( () => { handleMenuClose( '/teams' ); setAuthUser(null) }, 0 ) }>Log out</MenuItem>
     </Menu>
   );
 
@@ -240,7 +240,7 @@ function PrimarySearchAppBar ({user, router})
         <p>Notifications</p>
       </MenuItem>
       <Hidden mdUp>
-        <MenuItem onClick={ () => setTimeout( () => { handleMenuClose( "/teams" ) }, 0 ) }>
+        <MenuItem onClick={ () => setTimeout( () => { handleMenuClose( '/teams' ); setAuthUser(null) }, 0 ) }>
           <IconButton color="inherit">
             <PowerSettingsNew />
           </IconButton>
