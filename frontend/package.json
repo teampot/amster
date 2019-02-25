@@ -26,7 +26,7 @@
   "scripts": {
     "install": "npm install flow-typed",
     "typed": "flow-typed install",
-    "dev": "next --inspect",
+    "dev": "next",
     "build": "next build",
     "flow": "flow",
     "start": "next start"

@@ -22,15 +22,14 @@ class TeampotApp extends App {
   }
 
   static async getInitialProps({ Component, ctx }) {
-    let pageProps = {}
+    let pageProps = {};
 
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx)
     }
 
     if (ctx.req) {
-      let pageContext = getPageContext();
-      pageContext.user = {id: 10,firstName: 'John'};
+      pageProps.user = {id: 10,firstName: 'John'};
     }
 
     return { pageProps };
@@ -113,7 +112,7 @@ class TeampotApp extends App {
               <CssBaseline />
               {/* Pass pageContext to the _document though the renderPage enhancer
                 to render collected styles on server-side. */}
-              <PrimarySearchAppBar />
+              <PrimarySearchAppBar {...pageProps}/>
               <Component pageContext={this.pageContext} {...pageProps} />
             </ThemeProvider>
           </StylesProvider>
