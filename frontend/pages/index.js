@@ -1,3 +1,4 @@
+// @flow
 import '../src/bootstrap';
 // --- Post bootstrap -----
 import React from 'react';
@@ -12,6 +13,8 @@ import { makeStyles } from '@material-ui/styles';
 import Link from 'next/link';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import getPageContext from '../src/getPageContext';
+
 
 export const query = gql`
 {
@@ -28,6 +31,8 @@ const useStyles = makeStyles(theme => ({
 
 function Index() {
   const classes = useStyles();
+  const pageContext = getPageContext();
+  
   const [open, setState] = React.useState(false);
 
   const handleClose = () => {
@@ -61,6 +66,7 @@ function Index() {
           type="submit"
           variant="contained"
           color="primary"
+          // @ts-ignore
           className={classes.submit}
             >
             Sign in

@@ -30,3 +30,12 @@ npm run start
 ```bash
 flow-typed create-stub something
 ```
+#### For example:
+```bash
+flow-typed create-stub @material-ui/core/DialogTitle@3.9.2 --overwrite
+```
+
+## Debugging Next.js
+### Install "VS Code - Debugger for Chrome" extension
+### Ctrl + Shift + D -> and then launch debugger with the desired configuration
+### [Inspired on](https://github.com/Microsoft/vscode-recipes/tree/master/Next-js)
