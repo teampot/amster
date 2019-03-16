@@ -1,21 +1,12 @@
-const express  = require('express');
-const { ApolloServer } = require('apollo-server-express');
+const { prisma } = require('./dal/_generated/prisma-client')
+const { GraphQLServer } = require('graphql-yoga')
+const resolvers = require('./resolvers');
 
-const { typeDefs } = require('../data/server/schema.js');
-const { resolvers } = require('./resolvers/index.js');
-
-const server = new ApolloServer({ typeDefs, resolvers, introspection: true, playground: true });
-
-const app = express();
-server.applyMiddleware({ app });
-app.get("/", (req, res) => {
-  res.redirect("/graphql");
-});
-
-const port = 4000;
-
-app.listen({ port }, () =>
-  console.log(
-    `🚀 Server ready at http://localhost:${port}${server.graphqlPath}`
-  )
-);
+const server = new GraphQLServer({
+  typeDefs: './schema.graphql',
+  resolvers,
+  context: {
+    prisma
+  },
+})
+server.start(() => console.log('Server is running on http://localhost:4000'))
