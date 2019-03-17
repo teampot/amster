@@ -20,6 +20,8 @@ export const typeDefs = gql`
     header: String
     description: String
     createdAt: Date!
+    availableIn: String!
+    location: String!
     createdByUserId: ID!
     updatedAt: Date
     updatedByUserId: ID
