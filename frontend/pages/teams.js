@@ -3,20 +3,21 @@ import '../src/bootstrap';
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import gql from 'graphql-tag';
-import { Grid, Card, CardHeader, Avatar, IconButton, CardContent, Typography, CardActions, Chip } from '@material-ui/core';
+import { Grid, Card, CardHeader, Avatar, IconButton, CardContent, Typography, CardActions, Chip, Fab } from '@material-ui/core';
 import ShareIcon from '@material-ui/icons/Share';
 import MessageIcon from '@material-ui/icons/Message';
 import CreateIcon from '@material-ui/icons/Create';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import AvTimerIcon from '@material-ui/icons/AvTimer';
 import Group from '@material-ui/icons/Group';
+import AddIcon from '@material-ui/icons/Add';
 export const query = gql`
 {
 	me{id,firstName,lastName}
 }
 `;
 
-const useStyles = makeStyles( () => ( {
+const useStyles = makeStyles( (theme) => ( {
   root: {
 
   },
@@ -28,7 +29,12 @@ const useStyles = makeStyles( () => ( {
   },
   subHeaderIcon: {
     marginRight: 3
-  }
+  },
+  add: {
+    position: 'absolute',
+    bottom: theme.spacing.unit * 2,
+    right: theme.spacing.unit * 2,
+  },
 } ) );
 
 function Teams ()
@@ -217,8 +223,12 @@ function Teams ()
                     /> );
                   } ) }
                 </Grid>
+
               </CardContent>
             </Card>
+            <Fab className={classes.add}>
+                  <AddIcon/>
+            </Fab>
           </Grid>
         );
       } ) }

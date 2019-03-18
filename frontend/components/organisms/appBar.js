@@ -33,7 +33,7 @@ import ActionHome from '../atoms/ActionHome'
 
 const useStyles = makeStyles( theme => ( {
   root: {
-    width: '100%',
+    width: '100%'
   },
   home: {
     marginRight: 15,
